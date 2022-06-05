@@ -11,7 +11,7 @@ public class DBcon {
 
     public DBcon(){
         createConnection();
-        insertSchueler(1,2,"Lecker","Leo","m",7);
+//        insertSchueler(1,2,"Lecker","Leo","m",7);
         printAllSchueler();
     }
 
