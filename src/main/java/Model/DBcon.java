@@ -1,5 +1,7 @@
 package Model;
 
+import Model.Tables.Unternehmen;
+
 import java.sql.*;
 
 public class DBcon {
