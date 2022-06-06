@@ -68,7 +68,6 @@ public class DBcon {
                     "SELECT vorname,nachname,geschlecht,vorkenntnisse,kurs.bezeichnung,unternehmen.name " +
                             "FROM (schueler LEFT JOIN unternehmen ON schueler.uId = unternehmen.uId) " +
                             "LEFT JOIN kurs ON schueler.kId = kurs.kId");
-
         }catch (Exception ex){
             ex.printStackTrace();
         }

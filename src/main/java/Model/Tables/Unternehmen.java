@@ -3,7 +3,7 @@ package Model.Tables;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
-public record Unternehmen(IntegerProperty uId, StringProperty name) {
+public record Unternehmen(IntegerProperty uId, StringProperty name) implements DataSet {
 	public int getUId() {
 		return uId.get();
 	}

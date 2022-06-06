@@ -3,7 +3,7 @@ package Model.Tables;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
-public record Kurs(IntegerProperty kId, StringProperty bezeichnung, StringProperty raum) {
+public record Kurs(IntegerProperty kId, StringProperty bezeichnung, StringProperty raum) implements DataSet {
 	public int getKId() {
 		return kId.get();
 	}
