@@ -28,22 +28,6 @@
             <tabs>
                 <Tab text="Studenten">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <ScrollPane layoutY="-3.0" prefHeight="223.0" prefWidth="661.0">
-                                    <content>
-                                        <TableView prefHeight="232.0" prefWidth="548.0">
-                                            <columns>
-                                                <TableColumn prefWidth="75.0" text="Vorname" />
-                                                <TableColumn prefWidth="75.0" text="Nachname" />
-                                            </columns>
-                                        </TableView>
-                                    </content>
-                                </ScrollPane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                    <content>
                         <VBox prefWidth="100.0">
                             <children>
                                 <TableView prefHeight="568.0" prefWidth="945.0">
