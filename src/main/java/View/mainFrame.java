@@ -16,7 +16,7 @@ public class mainFrame extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(mainFrame.class.getResource("mainframe.fxml"));
-		Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+		Scene scene = new Scene(fxmlLoader.load(), 740, 560);
 		stage.setTitle("DHBW Datenbank");
 		stage.setScene(scene);
 		stage.show();
