@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 
 public record Schueler(IntegerProperty sId, IntegerProperty uId, IntegerProperty kId,
                        StringProperty vorname, StringProperty nachname,
-                       char geschlecht, IntegerProperty vorkenntnisse) {
+                       StringProperty geschlecht, IntegerProperty vorkenntnisse) {
 
 	public IntegerProperty sIdProperty(){
 		return sId;
@@ -50,17 +50,17 @@ public record Schueler(IntegerProperty sId, IntegerProperty uId, IntegerProperty
 
 	public StringProperty geschlechtProperty(){
 		SimpleStringProperty retStr = new SimpleStringProperty();
-		if(geschlecht == 'm')
+		if(geschlecht.get().charAt(0) == 'm')
 			retStr.set("Männlich");
-		else if(geschlecht == 'w')
+		else if(geschlecht.get().charAt(0) == 'w')
 			retStr.set("Weiblich");
 		else
 			retStr.set("Divers");
 		return retStr;
 	}
 
-	public char getGeschlecht() {
-		return geschlecht;
+	public String getGeschlecht() {
+		return geschlecht.get();
 	}
 
 	public int getVorkenntnisse() {
@@ -89,6 +89,10 @@ public record Schueler(IntegerProperty sId, IntegerProperty uId, IntegerProperty
 
 	public void setNachname(String nachname) {
 		this.nachname.set(nachname);
+	}
+
+	public void setGeschlecht(String geschlecht){
+		this.geschlecht.set(geschlecht);
 	}
 
 	public void setVorkenntnisse(int vorkenntnisse) {
