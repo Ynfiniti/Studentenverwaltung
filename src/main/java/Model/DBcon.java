@@ -1,6 +1,7 @@
 package Model;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBcon {
     private Connection connection;
@@ -11,7 +12,6 @@ public class DBcon {
 
     public DBcon(){
         createConnection();
-//        insertSchueler(1,2,"Lecker","Leo","m",7);
         printAllSchueler();
     }
 
@@ -19,54 +19,128 @@ public class DBcon {
         new DBcon();
     }
 
+//    /**
+//     * Prints all "schueler" joined by "unternehmen" and "kurs"
+//     *
+//     */
+//
+//    public void printAllSchueler(){
+//        ResultSet resultSet = getAllSchueler();
+//        try{
+//            while(resultSet.next()){
+//                System.out.print(resultSet.getString("vorname")+", ");
+//                System.out.print(resultSet.getString("nachname")+", ");
+//                System.out.print(resultSet.getString("geschlecht")+", ");
+//                System.out.print(resultSet.getInt("vorkenntnisse")+", ");
+//                System.out.print(resultSet.getString("kurs.bezeichnung")+", ");
+//                System.out.print(resultSet.getString("unternehmen.name"));
+//                System.out.println();
+//            }
+//        }catch (SQLException ex){
+//            ex.printStackTrace();
+//        }
+//    }
+
+//    /**
+//     * Gets all "schueler" joined by "unternehmen" and "kurs"<br>
+//     * Select data with:<br>
+//     * String "vorname"<br>
+//     * String "nachname"<br>
+//     * String "geschlecht"<br>
+//     * String "vorkenntnisse"<br>
+//     * String "kurs.bezeichnung"<br>
+//     * String "unternehmen.name"
+//     *
+//     * @return  ResultSet
+//     */
+//
+//    public ResultSet getAllSchueler(){
+//        ResultSet resultSet = null;
+//        try{
+//            Statement statement = connection.createStatement();
+//            resultSet = statement.executeQuery(
+//                    "SELECT vorname,nachname,geschlecht,vorkenntnisse,kurs.bezeichnung,unternehmen.name " +
+//                            "FROM (schueler LEFT JOIN unternehmen ON schueler.uId = unternehmen.uId) " +
+//                            "LEFT JOIN kurs ON schueler.kId = kurs.kId");
+//
+//        }catch (Exception ex){
+//            ex.printStackTrace();
+//        }
+//        return resultSet;
+//    }
+
     /**
-     * Prints all "schueler" joined by "unternehmen" and "kurs"
+     * Gets a List with all Schueler in Database
      *
+     * @return ArrayList<Schueler>
      */
 
-    public void printAllSchueler(){
-        ResultSet resultSet = getAllSchueler();
-        try{
-            while(resultSet.next()){
-                System.out.print(resultSet.getString("vorname")+", ");
-                System.out.print(resultSet.getString("nachname")+", ");
-                System.out.print(resultSet.getString("geschlecht")+", ");
-                System.out.print(resultSet.getInt("vorkenntnisse")+", ");
-                System.out.print(resultSet.getString("kurs.bezeichnung")+", ");
-                System.out.print(resultSet.getString("unternehmen.name"));
-                System.out.println();
-            }
-        }catch (SQLException ex){
-            ex.printStackTrace();
-        }
-    }
-
-    /**
-     * Gets all "schueler" joined by "unternehmen" and "kurs"<br>
-     * Select data with:<br>
-     * String "vorname"<br>
-     * String "nachname"<br>
-     * String "geschlecht"<br>
-     * String "vorkenntnisse"<br>
-     * String "kurs.bezeichnung"<br>
-     * String "unternehmen.name"
-     *
-     * @return  ResultSet
-     */
-
-    public ResultSet getAllSchueler(){
-        ResultSet resultSet = null;
+    public ArrayList<Schueler> getAllSchueler(){
+        ArrayList<Schueler> schuelerArrayList = new ArrayList<Schueler>();
         try{
             Statement statement = connection.createStatement();
-            resultSet = statement.executeQuery(
-                    "SELECT vorname,nachname,geschlecht,vorkenntnisse,kurs.bezeichnung,unternehmen.name " +
-                            "FROM (schueler LEFT JOIN unternehmen ON schueler.uId = unternehmen.uId) " +
-                            "LEFT JOIN kurs ON schueler.kId = kurs.kId");
-
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM schueler");
+            while(resultSet.next()){
+                Schueler schueler = new Schueler();
+                schueler.setVorname(resultSet.getString("Vorname"));
+                schueler.setNachname(resultSet.getString("Nachname"));
+                schueler.setGeschlecht(resultSet.getString("Geschlecht"));
+                schueler.setVorkenntnisse(resultSet.getInt("Vorkenntnisse"));
+                schueler.setUId(resultSet.getInt("uId"));
+                schueler.setKId(resultSet.getInt("kId"));
+                schuelerArrayList.add(schueler);
+            }
         }catch (Exception ex){
             ex.printStackTrace();
         }
-        return resultSet;
+        return schuelerArrayList;
+    }
+
+    /**
+     * Gets a List with all Kurse in Database
+     *
+     * @return ArrayList<Kurs>
+     */
+
+    public ArrayList<Kurs> getAllKurs(){
+        ArrayList<Kurs> kursArrayList = new ArrayList<Kurs>();
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM schueler");
+            while(resultSet.next()){
+                Kurs kurs = new Kurs();
+                kurs.setKId(resultSet.getInt("kId"));
+                kurs.setBezeichnung(resultSet.getString("Bezeichnung"));
+                kurs.setRaum(resultSet.getString("Raum"));
+                kursArrayList.add(kurs);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return kursArrayList;
+    }
+
+    /**
+     * Gets a List with all Unternehmen in Database
+     *
+     * @return ArrayList<Unternehmen>
+     */
+
+    public ArrayList<Unternehmen> getAllUnternehmen(){
+        ArrayList<Unternehmen> unternehmenArrayList = new ArrayList<Unternehmen>();
+        try{
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM schueler");
+            while(resultSet.next()){
+                Unternehmen unternehmen = new Unternehmen();
+                unternehmen.setUId(resultSet.getInt("uId"));
+                unternehmen.setName(resultSet.getString("Name"));
+                unternehmenArrayList.add(unternehmen);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return unternehmenArrayList;
     }
 
     /**
